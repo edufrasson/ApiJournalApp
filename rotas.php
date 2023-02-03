@@ -30,7 +30,7 @@ switch($url_parse){
         break;
 
 
-    case '/noticia/home':
+    case '/noticia':
         NoticiaController::index();
     break;   
 
