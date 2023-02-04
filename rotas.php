@@ -2,28 +2,29 @@
 
 use App\Controller\NoticiaController;
 use App\Controller\LoginController;
+use App\Controller\CategoriaController;
 
 $url_parse = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
 
 include 'Autoload.php';
 
-switch($url_parse){
+switch ($url_parse) {
 
     case '/login':
         LoginController::index();
-    break;
+        break;
 
     case '/login/save':
         LoginController::save();
-    break;
+        break;
 
     case '/login/auth':
         LoginController::auth();
-    break;
+        break;
 
     case '/logout':
         LoginController::logout();
-    break;
+        break;
 
     case '/login/form':
         LoginController::form();
@@ -32,22 +33,26 @@ switch($url_parse){
 
     case '/noticia':
         NoticiaController::index();
-    break;   
+        break;
 
 
     case '/noticia/save':
         NoticiaController::save();
-    break;
-    
+        break;
+
     case '/noticia/delete':
         NoticiaController::delete();
-    break;
-    
+        break;
+
     case '/noticia/search':
         NoticiaController::search();
-    break;    
+        break;
+
+    case '/categoria/get-by-id':
+        CategoriaController::getById();
+        break;
 
     default:
         LoginController::index();
-    break;
+        break;
 }

@@ -61,7 +61,21 @@ class CategoriaDAO extends DAO{
             return $qnt_linhas;
 
         }catch(Exception $e){
-            echo 'Não foi possível checar a categoria, erro: ' . $e->getMessage();
+            return 'Não foi possível checar a categoria, erro: ' . $e->getMessage();
         }        
+    }
+
+    public function getById($id){
+        try{
+            $sql = 'SELECT * FROM categoria_noticia WHERE id = ?';
+
+            $stmt = $this->conexao->prepare($sql);
+            $stmt->bindValue(1, $id);
+            $stmt->execute();
+
+            return $stmt->fetchObject();
+        }catch(Exception $e){
+            return 'Não foi possível checar a categoria, erro: ' . $e->getMessage();
+        }     
     }
 }

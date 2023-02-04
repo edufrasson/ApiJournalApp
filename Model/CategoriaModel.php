@@ -11,4 +11,8 @@ class CategoriaModel{
     function save(){        
         $dao = new CategoriaDAO;
     }
+    public function getById($id){
+        $dao = new CategoriaDAO;
+        return $dao->getById($id);
+    }
 }

@@ -31,6 +31,18 @@ abstract class Controller
         exit(json_encode($response));
     }
 
+    protected static function getRequestFromJSON(){
+        header("Access-Control-Allow-Origin: *");  
+        header('Access-Control-Allow-Methods: GET, POST, PATCH, PUT, DELETE, OPTIONS');
+        header('Access-Control-Allow-Headers: Origin, Content-Type, Accept');      
+        header("Content-type: application/json; charset=utf-8");
+        header("Cache-Control: no-cache, must-revalidate");
+        header("Expires: Mon, 26 Jul 1997 05:00:00 GMT");
+        header("Pragma: public");      
+        
+        return json_decode(file_get_contents('php://input'));
+    }
+
     protected static function isAuthenticated()
     {
         if (!isset($_SESSION['usuario_logado']))

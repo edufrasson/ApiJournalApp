@@ -9,31 +9,20 @@ class NoticiaController extends Controller
 {
     public static function save()
     {
-        try {
-            header('Access-Control-Allow-Methods: GET, POST, PATCH, PUT, DELETE, OPTIONS');
-            header('Access-Control-Allow-Headers: Origin, Content-Type, Accept');
-            header('Access-Control-Allow-Credentials: True');
-            header("Access-Control-Allow-Origin: *");
+        try {           
+            $data = parent::getRequestFromJSON();
 
-            $data = json_decode(file_get_contents('php://input'));
-            var_dump($data);
             $model = new NoticiaModel();
             $nome_categoria = $data->category;
 
             $id_categoria = $model->checkCategory($nome_categoria);
 
+            $model->id = $data->id;
             $model->id_categoria = $id_categoria->id;
             $model->titulo = $data->title;
-            $model->conteudo = $data->content;
-
-            if (isset($data->id)) {
-                $model->id = $data->id;
-            } else {
-                $model->id = null;
-            }
+            $model->conteudo = $data->content;        
 
             $model->save();
-
 
             parent::setResponseAsJSON('Inserido!');
         } catch (Exception $e) {
